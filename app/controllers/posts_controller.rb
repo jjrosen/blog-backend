@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
 before_action :authenticate_user, except: [:index]
 
+
   def index
     posts = Post.all.order(:id)
     render json: posts
@@ -11,6 +12,7 @@ before_action :authenticate_user, except: [:index]
       title: params[:title],
       body: params[:body],
       image: params[:image],
+      user_id: current_user.id
     )
     if post.save
       render json: post
