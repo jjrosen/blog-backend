@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 before_action :authenticate_user, except: [:index, :show]
-before_action authorize_post_owner, only: [:update, :destroy]
+before_action :authorize_post_owner, only: [:update, :destroy]
 
   def index
     posts = Post.all.order(:id)
