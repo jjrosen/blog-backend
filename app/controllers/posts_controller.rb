@@ -1,24 +1,24 @@
 class PostsController < ApplicationController
-before_action :authenticate_user, except: [:index]
-
+before_action :authenticate_user, except: [:index, :show]
+before_action authorize_post_owner, only: [:update, :destroy]
 
   def index
     posts = Post.all.order(:id)
     render json: posts
   end
-
+  
   def create
-    post = Post.new(
-      title: params[:title],
-      body: params[:body],
-      image: params[:image],
-      user_id: current_user.id
-    )
-    if post.save
-      render json: post
-    else
-      render json: { errors: post.errors.full_messages }, status: :bad_request
-    end
+      post = Post.new(
+        title: params[:title],
+        body: params[:body],
+        image: params[:image],
+        user_id: current_user.id
+      )
+      if post.save
+        render json: post
+      else
+        render json: { errors: post.errors.full_messages }, status: :bad_request
+      end
   end
 
   def show
