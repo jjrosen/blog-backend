@@ -1,9 +1,56 @@
-Post.create!(title: "Innovative Synergy Solutions", body: "Our team is dedicated to providing groundbreaking solutions that redefine industry standards. With a focus on efficiency and innovation, we continuously push boundaries to deliver exceptional results.", image: "https://picsum.photos/640/480?random=1")
-Post.create!(title: "Revolutionizing Market Strategies", body: "By leveraging data-driven insights and cutting-edge technology, we help businesses navigate complex market landscapes with confidence and precision.", image: "https://picsum.photos/640/480?random=2")
-Post.create!(title: "Next-Gen Productivity Tools", body: "Our latest software suite empowers teams to collaborate seamlessly, enhancing productivity while streamlining workflows for maximum efficiency.", image: "https://picsum.photos/640/480?random=3")
-Post.create!(title: "Sustainable Growth Tactics", body: "Sustainability is at the core of our growth strategies. We prioritize eco-friendly practices while ensuring long-term success for businesses and communities alike.", image: "https://picsum.photos/640/480?random=4")
-Post.create!(title: "AI-Powered Business Insights", body: "Harnessing the power of artificial intelligence, our solutions provide deep insights into market trends, customer behavior, and operational efficiencies.", image: "https://picsum.photos/640/480?random=5")
-Post.create!(title: "Breakthroughs in Cloud Computing", body: "Our cloud solutions offer unparalleled scalability, security, and performance, making digital transformation smoother and more accessible than ever.", image: "https://picsum.photos/640/480?random=6")
-Post.create!(title: "Empowering Remote Workforces", body: "With the shift to remote work, our tools ensure seamless communication, project management, and team collaboration across the globe.", image: "https://picsum.photos/640/480?random=7")
-Post.create!(title: "Cybersecurity in the Modern Era", body: "Protecting sensitive data is our top priority. Our advanced security protocols safeguard businesses from cyber threats and ensure compliance with industry standards.", image: "https://picsum.photos/640/480?random=8")
-Post.create!(title: "Blockchain and the Future of Finance", body: "Decentralized finance is reshaping the financial world. Our expertise in blockchain technology helps businesses stay ahead in this rapidly evolving sector.", image: "https://picsum.photos/640/480?random=9")
+
+Post.destroy_all
+User.destroy_all
+
+puts "Creating Users ..."
+
+admin = User.create!(
+  name: "Admin Jack",
+  email: "aj@email.com",
+  password:"123",
+  admin: true
+)
+
+user1 = User.create!(
+  name: "John Doe",
+  email:"jd1@email.com",
+  password:"123",
+  admin: false
+)
+
+user2 = User.create!(
+  name: "Jane Doe",
+  email:"jd2@email.com",
+  password:"123",
+  admin: false
+)
+puts "Users Created!"
+
+puts "Createing Posts ..."
+
+posts = [
+{title: "Innovative Synergy Solutions", body: "Our team is dedicated to providing groundbreaking solutions that redefine industry standards. With a focus on efficiency and innovation, we continuously push boundaries to deliver exceptional results.", image: 1},
+{title: "Revolutionizing Market Strategies", body: "By leveraging data-driven insights and cutting-edge technology, we help businesses navigate complex market landscapes with confidence and precision.", image: 2},
+{title: "Next-Gen Productivity Tools", body: "Our latest software suite empowers teams to collaborate seamlessly, enhancing productivity while streamlining workflows for maximum efficiency.", image: 3},
+{title: "Sustainable Growth Tactics", body: "Sustainability is at the core of our growth strategies. We prioritize eco-friendly practices while ensuring long-term success for businesses and communities alike.", image: 4},
+{title: "AI-Powered Business Insights", body: "Harnessing the power of artificial intelligence, our solutions provide deep insights into market trends, customer behavior, and operational efficiencies.", image: 5},
+{title: "Breakthroughs in Cloud Computing", body: "Our cloud solutions offer unparalleled scalability, security, and performance, making digital transformation smoother and more accessible than ever.", image: 6},
+{title: "Empowering Remote Workforces", body: "With the shift to remote work, our tools ensure seamless communication, project management, and team collaboration across the globe.", image: 7},
+{title: "Cybersecurity in the Modern Era", body: "Protecting sensitive data is our top priority. Our advanced security protocols safeguard businesses from cyber threats and ensure compliance with industry standards.", image: 8},
+{title: "Blockchain and the Future of Finance", body: "Decentralized finance is reshaping the financial world. Our expertise in blockchain technology helps businesses stay ahead in this rapidly evolving sector.", image: 9}
+]
+
+
+posts.each do |posts_data|
+  Post.create!(
+    title: posts_data[:title],
+    body: posts_data[:body],
+    image: "https://picsum.photos/640/480?random=#{posts_data[:image]}",
+    user: [admin, user1, user2].sample ,   
+  )
+end
+
+puts "Posts Created!"
+puts "Seeding Complete!"
+
+
